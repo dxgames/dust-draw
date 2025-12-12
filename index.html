@@ -12,7 +12,20 @@
 <link rel="apple-touch-icon" href="https://i.postimg.cc/QMCFv1X0/icono.png">
 <link rel="icon" href="https://i.postimg.cc/QMCFv1X0/icono.png">
 <style>
-    body { display:flex; justify-content:center; align-items:center; height:100vh; margin:0; background:#331a1a; font-family:'Courier New', monospace; user-select:none; overflow:hidden; flex-direction:column; }
+    /* MODIFICACIÓN AQUÍ para el fondo externo */
+    body { 
+        display:flex; 
+        justify-content:center; 
+        align-items:center; 
+        height:100vh; 
+        margin:0; 
+        background: url('https://i.postimg.cc/h4mGGvTx/fondoextermo.png') no-repeat center center fixed; /* NUEVO FONDO */
+        background-size: cover; 
+        font-family:'Courier New', monospace; 
+        user-select:none; 
+        overflow:hidden; 
+        flex-direction:column; 
+    }
     .game-container { width:900px; height:500px; position:relative; border:8px solid #331a1a; box-shadow:0 0 0 4px #c28b55; overflow:hidden; max-width:90vw; max-height:90vh; cursor:pointer; }
     .pixel-text { color:#ffcc00; text-shadow:2px 2px 0 #8c5d3f,4px 4px 0 #331a1a; font-weight:bold; line-height:1.2; padding:5px; text-transform:uppercase; }
 
