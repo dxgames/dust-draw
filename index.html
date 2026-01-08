@@ -266,7 +266,7 @@ function showSettingsMenu(e) {
     const musicState = isMusicEnabled ? "ACTIVADA" : "DESACTIVADA";
 
     showMenu("AJUSTES", `
-        <div class="menu-option" onclick="toggleFullScreen(event)">PANTALLA COMPLETA [ ]</div>
+        <div class="menu-option" onclick="toggleFullScreen(event)">PANTALLA COMPLETA (navegador)</div>
         <div class="menu-option ${isSoundEnabled ? 'active-toggle' : ''}"
              onclick="toggleSetting(event, 'sound')">SONIDO: ${soundState}</div>
         <div class="menu-option ${isMusicEnabled ? 'active-toggle' : ''} disabled"
@@ -299,7 +299,7 @@ function showAbout(e) {
     e.stopPropagation();
     showMenu("ACERCA DEL JUEGO", `
         <div class="menu-option" style="color:white;">CREADO POR DX GAMES</div>
-        <div class="menu-option" style="color:#ddd;">Versión: v1.0 (Vertical)</div>
+        <div class="menu-option" style="color:#ddd;">Versión: v1.0</div>
         <div class="menu-option" style="color:white;">¡GRACIAS POR JUGAR!</div>
     `);
 }
