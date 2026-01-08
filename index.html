@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>DUST & DRAW</title>
 
 <meta property="og:title" content="DUST & DRAW - Un Duelo Rápido">
@@ -12,61 +12,116 @@
 <link rel="apple-touch-icon" href="https://i.postimg.cc/QMCFv1X0/icono.png">
 <link rel="icon" href="https://i.postimg.cc/QMCFv1X0/icono.png">
 <style>
-    /* MODIFICACIÓN AQUÍ para el fondo externo */
+    /* ==========================
+       ESTILOS v1.0 - VERTICAL FINAL
+    ========================== */
     body { 
         display:flex; 
         justify-content:center; 
         align-items:center; 
         height:100vh; 
+        width: 100vw;
         margin:0; 
-        background: url('https://i.postimg.cc/h4mGGvTx/fondoextermo.png') no-repeat center center fixed; /* NUEVO FONDO */
-        background-size: cover; 
+        background: #000;
         font-family:'Courier New', monospace; 
         user-select:none; 
         overflow:hidden; 
         flex-direction:column; 
     }
-    .game-container { width:900px; height:500px; position:relative; border:8px solid #331a1a; box-shadow:0 0 0 4px #c28b55; overflow:hidden; max-width:90vw; max-height:90vh; cursor:pointer; }
+
+    .game-container { 
+        width:100%; 
+        height:100%; 
+        position:relative; 
+        border:none; 
+        box-shadow:none; 
+        overflow:hidden; 
+        cursor:pointer; 
+    }
+    
     .pixel-text { color:#ffcc00; text-shadow:2px 2px 0 #8c5d3f,4px 4px 0 #331a1a; font-weight:bold; line-height:1.2; padding:5px; text-transform:uppercase; }
 
-    #img-background { position:absolute; width:100%; height:100%; top:0; left:0; background-image:url('https://i.postimg.cc/d3mTjw6Z/escenario.png'); background-size:cover; background-position:center bottom; z-index:1; }
-    #title { position:absolute; top:5px; left:50%; transform:translateX(-50%); width:700px; height:140px; background-image:url('https://i.postimg.cc/1XcNrsBN/título.png'); background-size:contain; background-repeat:no-repeat; background-position:center top; z-index:20; }
-
-    .character { position:absolute; bottom:110px; width:100px; height:150px; background-size:100% 100%; background-repeat:no-repeat; background-position:center bottom; transition:background-image .05s, opacity .3s, filter .1s; z-index:5; }
-
-    #player-cowboy { left:100px; background-image:url('https://i.postimg.cc/MHD8YFQH/vaquerodesarmado.png'); }
-    #enemy-cowboy  { right:100px; background-image:url('https://i.postimg.cc/KjNy5HMz/forajidodesarmado.png'); }
-
-    .armed-player{
-        background-image:url('https://i.postimg.cc/FzZQxBLK/vaqueroarmado.png') !important;
-    }
-    .armed-enemy{
-        background-image:url('https://i.postimg.cc/BbgGCVKX/forajidoarmado.png') !important;
+    #img-background { 
+        position:absolute; 
+        width:100%; 
+        height:100%; 
+        top:0; 
+        left:0; 
+        background-image:url('https://i.postimg.cc/d3mTjw6Z/escenario.png'); 
+        background-size:cover; 
+        background-position:center bottom; 
+        z-index:1; 
     }
 
-    .dead-player{ background-image:url('https://i.postimg.cc/1tz9jPyz/vaqueromuerto.png') !important; opacity:1; filter:grayscale(100%); bottom:90px; height:130px; }
-    .dead-enemy{ background-image:url('https://i.postimg.cc/HWRpBfRX/forajidomuerto.png') !important; opacity:1; filter:grayscale(100%); bottom:90px; height:130px; }
+    #title { 
+        position:absolute; 
+        top:5%; 
+        left:50%; 
+        transform:translateX(-50%); 
+        width:90%; 
+        max-width: 600px;
+        height:15vh; 
+        background-image:url('https://i.postimg.cc/1XcNrsBN/título.png'); 
+        background-size:contain; 
+        background-repeat:no-repeat; 
+        background-position:center top; 
+        z-index:20; 
+    }
+
+    .character { 
+        position:absolute; 
+        bottom:15%; 
+        width:25vw; 
+        height:25vh; 
+        max-width: 140px; 
+        max-height: 210px;
+        background-size:contain; 
+        background-repeat:no-repeat; 
+        background-position:center bottom; 
+        transition:background-image .05s, opacity .3s, filter .1s; 
+        z-index:5; 
+    }
+
+    #player-cowboy { left:5%; background-image:url('https://i.postimg.cc/MHD8YFQH/vaquerodesarmado.png'); }
+    #enemy-cowboy  { right:5%; background-image:url('https://i.postimg.cc/KjNy5HMz/forajidodesarmado.png'); }
+
+    .armed-player{ background-image:url('https://i.postimg.cc/FzZQxBLK/vaqueroarmado.png') !important; }
+    .armed-enemy{ background-image:url('https://i.postimg.cc/BbgGCVKX/forajidoarmado.png') !important; }
+
+    .dead-player{ background-image:url('https://i.postimg.cc/1tz9jPyz/vaqueromuerto.png') !important; opacity:1; filter:grayscale(100%); }
+    .dead-enemy{ background-image:url('https://i.postimg.cc/HWRpBfRX/forajidomuerto.png') !important; opacity:1; filter:grayscale(100%); }
 
     @keyframes flash { 0%{filter:brightness(1);} 50%{filter:brightness(1.5);} 100%{filter:brightness(1);} }
     .shooting{ animation:flash .15s ease-out; }
 
-    #message-area{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; z-index:15; width:80%; pointer-events:none; }
-    #countdown{ font-size:60px; color:#fff; text-shadow:6px 6px 0 #c95c46; margin-bottom:30px; }
-    #result-message{ margin-top:30px; font-size:25px; font-weight:bold; color:#ffcc00; display:none; background:rgba(0,0,0,0.6); padding:15px 25px; border:4px solid #c95c46; white-space:pre-wrap; text-shadow:4px 4px 0 black; }
+    #message-area{ position:absolute; top:45%; left:50%; transform:translate(-50%,-50%); text-align:center; z-index:15; width:90%; pointer-events:none; }
+    
+    #countdown{ font-size:12vw; color:#fff; text-shadow:4px 4px 0 #c95c46; margin-bottom:20px; } 
+    #result-message{ margin-top:20px; font-size:6vw; font-weight:bold; color:#ffcc00; display:none; background:rgba(0,0,0,0.7); padding:10px; border:2px solid #c95c46; white-space:pre-wrap; text-shadow:2px 2px 0 black; width: 80%; margin-left: auto; margin-right: auto; border-radius: 10px;}
 
-    /* MENU */
-    #menu-container{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:30; text-align:center; background:rgba(0,0,0,0.7); padding:20px 40px; border:5px solid #c28b55; display:none; min-width:260px; }
-    .menu-header{ font-size:28px; margin-bottom:12px; color:#ffcc00; }
-    .menu-option{ font-size:18px; margin:10px 0; cursor:pointer; color:#fff; padding:6px 8px; border-radius:6px; }
-    .menu-option:hover{ background:rgba(255,204,0,0.06); color:#ffcc00; }
+    #menu-container{ 
+        position:absolute; 
+        top:50%; 
+        left:50%; 
+        transform:translate(-50%,-50%); 
+        z-index:30; 
+        text-align:center; 
+        background:rgba(0,0,0,0.85); 
+        padding:20px; 
+        border:4px solid #c28b55; 
+        display:none; 
+        width: 80%; 
+        max-width: 400px;
+        border-radius: 10px;
+    }
+    .menu-header{ font-size:24px; margin-bottom:12px; color:#ffcc00; }
+    .menu-option{ font-size:20px; margin:15px 0; cursor:pointer; color:#fff; padding:10px; border-radius:6px; border: 1px solid rgba(255,255,255,0.1); }
+    .menu-option:hover{ background:rgba(255,204,0,0.1); color:#ffcc00; border-color: #ffcc00; }
 
-    .disabled { color:#777; cursor:default; } /* Cursor cambiado a default para deshabilitados */
-
-    .active-difficulty{ color:#79c946 !important; text-shadow:3px 3px 0 #4c7a28 !important; }
-
+    .disabled { color:#777; cursor:default; border-color: transparent; } 
+    .active-difficulty{ color:#79c946 !important; text-shadow:3px 3px 0 #4c7a28 !important; border-color: #79c946 !important; }
     .active-toggle { color: #ffcc00 !important; text-shadow: 2px 2px 0 #8c5d3f !important; }
-
-    .back-button{ margin-top:12px; font-size:16px; color:#fff; cursor:pointer; opacity:.9; }
+    .back-button{ margin-top:15px; font-size:18px; color:#fff; cursor:pointer; opacity:.9; padding: 10px;}
 </style>
 </head>
 
@@ -121,7 +176,6 @@ let drawTimeout;
 /* ==========================
         DIFICULTADES
 ========================== */
-
 const DIFFICULTY_MODIFIERS = {
     EASY: { min: 800, max: 2000 },
     NORMAL: { min: 500, max: 1000 },
@@ -133,17 +187,10 @@ let savedDiff = localStorage.getItem("dx_difficulty");
 let currentDifficulty = DIFFICULTY_MODIFIERS[savedDiff] ? savedDiff : "EASY";
 
 /* ==========================
-          AUDIO STATE
+          AUDIO & FULLSCREEN
 ========================== */
-
 let isSoundEnabled = (localStorage.getItem("dx_sound") === "false" ? false : true); 
 let isMusicEnabled = (localStorage.getItem("dx_music") === "false" ? false : true); 
-
-
-/* ==========================
-            AUDIO
-========================== */
-
 let audioCtx = null;
 
 function ensureAudio() {
@@ -167,10 +214,18 @@ function playBeep(duration=0.07, freq=900) {
     } catch(e){}
 }
 
+function toggleFullScreen(e) {
+    if (e) e.stopPropagation();
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => console.log(err));
+    } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+    }
+}
+
 /* ==========================
             MENÚS
 ========================== */
-
 menuBack.addEventListener("click", () => showMainMenu());
 
 function showMenu(titleText, html, showBack=true) {
@@ -199,20 +254,19 @@ function showMainMenu() {
 
 function showPlayMenu(e) {
     e.stopPropagation();
-    // Se elimina la indicación de dificultad.
     showMenu("JUGAR", `
         <div class="menu-option" onclick="showDifficultyMenu(event)">VS CPU</div>
         <div class="menu-option disabled">1 VS 1</div>
     `);
 }
 
-// Menú de Ajustes con Opciones de Audio
 function showSettingsMenu(e) {
     e.stopPropagation();
     const soundState = isSoundEnabled ? "ACTIVADO" : "DESACTIVADO";
     const musicState = isMusicEnabled ? "ACTIVADA" : "DESACTIVADA";
 
     showMenu("AJUSTES", `
+        <div class="menu-option" onclick="toggleFullScreen(event)">PANTALLA COMPLETA [ ]</div>
         <div class="menu-option ${isSoundEnabled ? 'active-toggle' : ''}"
              onclick="toggleSetting(event, 'sound')">SONIDO: ${soundState}</div>
         <div class="menu-option ${isMusicEnabled ? 'active-toggle' : ''} disabled"
@@ -226,26 +280,18 @@ function toggleSetting(e, type) {
         isSoundEnabled = !isSoundEnabled;
         localStorage.setItem("dx_sound", isSoundEnabled);
         playBeep(0.04, isSoundEnabled ? 1300 : 300); 
-    } else if (type === 'music') {
-        // Opción no funcional
-        return;
-    }
+    } 
     showSettingsMenu({stopPropagation:()=>{}});
 }
 
 function showDifficultyMenu(e) {
     e.stopPropagation();
-
     const opt = (key,label) =>
-        // Al hacer clic, se selecciona la dificultad Y se inicia el juego
         `<div class="menu-option ${currentDifficulty===key?'active-difficulty':''}"
              onclick="selectDifficulty(event,'${key}', true)">${label}</div>`;
 
     showMenu("DIFICULTAD",
-        opt("EASY","FÁCIL") +
-        opt("NORMAL","NORMAL") +
-        opt("HARD","DIFÍCIL") +
-        opt("IMPOSSIBLE","IMPOSIBLE"),
+        opt("EASY","FÁCIL") + opt("NORMAL","NORMAL") + opt("HARD","DIFÍCIL") + opt("IMPOSSIBLE","IMPOSIBLE"),
     );
 }
 
@@ -253,7 +299,7 @@ function showAbout(e) {
     e.stopPropagation();
     showMenu("ACERCA DEL JUEGO", `
         <div class="menu-option" style="color:white;">CREADO POR DX GAMES</div>
-        <div class="menu-option" style="color:#ddd;">Versión: Beta v0.9</div>
+        <div class="menu-option" style="color:#ddd;">Versión: v1.0 (Vertical)</div>
         <div class="menu-option" style="color:white;">¡GRACIAS POR JUGAR!</div>
     `);
 }
@@ -262,20 +308,13 @@ function selectDifficulty(e, diff, shouldStartGame = false) {
     e.stopPropagation();
     currentDifficulty = diff;
     localStorage.setItem("dx_difficulty", diff);
-    
-    if (shouldStartGame) {
-        // Iniciar el juego directamente después de seleccionar la dificultad
-        startGame(e);
-    } else {
-        // Si no debe iniciar, solo actualiza el menú
-        showDifficultyMenu({stopPropagation:()=>{}}); 
-    }
+    if (shouldStartGame) startGame(e);
+    else showDifficultyMenu({stopPropagation:()=>{}}); 
 }
 
 /* ==========================
         GAMEPLAY
 ========================== */
-
 function resetCharacters() {
     playerCowboy.className = "character";
     enemyCowboy.className = "character";
@@ -292,7 +331,6 @@ function startGame(e) {
 
     countdownDisplay.textContent = "¡PREPARADOS!";
     countdownDisplay.style.display = "block";
-
     isCountingDown = true;
     isDrawTime = false;
 
@@ -315,22 +353,15 @@ function startGame(e) {
 function startDrawPhase() {
     isCountingDown = false;
     isDrawTime = true;
-
     setTimeout(()=>{
         drawStartTime = Date.now();
         const mod = DIFFICULTY_MODIFIERS[currentDifficulty];
         const reaction = Math.random() * (mod.max - mod.min) + mod.min;
-
         drawTimeout = setTimeout(()=>{
             if (isDrawTime && enemyShotTime === 0) enemyShoot();
         }, reaction);
-
     }, 60);
 }
-
-/* ==========================
-     PLAYER SHOOT
-========================== */
 
 function playerShoot() {
     if (isCountingDown) {
@@ -339,138 +370,74 @@ function playerShoot() {
         endGame("¡PERDISTE!\nFUEGO ANTICIPADO!");
         return;
     }
-
     if (!isDrawTime || playerShotTime !== 0) return;
-
     playerShotTime = Date.now() - drawStartTime;
-
     playerCowboy.classList.add("armed-player","shooting");
-
     void playerCowboy.offsetHeight;
-
     playBeep(0.06, 1100);
-
-    setTimeout(() => {
-        resolveWinner();
-    }, 120);
+    setTimeout(() => { resolveWinner(); }, 120);
 }
-
-/* ==========================
-     ENEMY SHOOT
-========================== */
 
 function enemyShoot() {
     if (!isDrawTime || enemyShotTime !== 0) return;
-
     enemyShotTime = Date.now() - drawStartTime;
-
     enemyCowboy.classList.add("armed-enemy","shooting");
-
     void enemyCowboy.offsetHeight;
-
     playBeep(0.05, 700);
-
-    setTimeout(() => {
-        resolveWinner();
-    }, 120);
+    setTimeout(() => { resolveWinner(); }, 120);
 }
-
-/* ==========================
-        RESOLUCIÓN
-========================== */
 
 function resolveWinner() {
     if (!isDrawTime) return;
-
     isDrawTime = false; 
     clearTimeout(drawTimeout); 
-
     const p = playerShotTime;
     const e = enemyShotTime;
-
     let msg = "";
 
-    // --- NADIE DISPARÓ ---
-    if (p === 0 && e === 0) {
-        msg = `¡NADIE DISPARÓ!\nDEMASIADO LENTO.`;
-    }
-
-    // --- EMPATE REAL (tiempos iguales o diferencia mínima) ---
+    if (p === 0 && e === 0) msg = `¡NADIE DISPARÓ!\nDEMASIADO LENTO.`;
     else if (p > 0 && e > 0 && Math.abs(p - e) <= 5) {
         playerCowboy.classList.add("dead-player");
         enemyCowboy.classList.add("dead-enemy");
         msg = `¡EMPATE!\nAmbos: ${Math.round((p + e) / 2)}ms\n¡NO HAY GANADOR!`;
     }
-
-    // --- Ambos dispararon, se compara el tiempo ---
     else if (p > 0 && e > 0) {
         if (p < e) {
             enemyCowboy.classList.add("dead-enemy");
             msg = `¡GANASTE!\nTU: ${p}ms\nFORAJIDO: ${e}ms\n¡MUY RÁPIDO!`;
-        } else { // p > e
+        } else {
             playerCowboy.classList.add("dead-player");
             msg = `¡PERDISTE!\nFORAJIDO: ${e}ms\nTU: ${p}ms\n¡MUY LENTO!`;
         }
     }
-
-    // --- Player shoots, enemy doesn't ---
     else if (p > 0 && e === 0) {
         enemyCowboy.classList.add("dead-enemy");
         msg = `¡GANASTE!\nTU: ${p}ms\n¡MUY RÁPIDO!`;
     }
-
-    // --- Enemy shoots, player doesn't ---
     else if (e > 0 && p === 0) {
         playerCowboy.classList.add("dead-player");
         msg = `¡PERDISTE!\nFORAJIDO: ${e}ms\n¡MUY LENTO!`;
     }
-
     endGame(msg);
 }
 
 function endGame(msg) {
     clearInterval(countdownTimer);
     clearTimeout(drawTimeout);
-
     countdownDisplay.textContent = "FIN DEL DUELO";
-
     resultMessage.textContent = msg;
     setTimeout(()=> resultMessage.style.display = "block", 800);
-
     gameState = "WAITING_RESTART";
 }
 
-/* ==========================
-        INPUT HANDLING
-========================== */
-
 function handleInput() {
-
-    if (gameState === "TITLE") {
-        showMainMenu();
-        return;
-    }
-
+    if (gameState === "TITLE") { showMainMenu(); return; }
     if (menuContainer.style.display === "block") return;
-
-    if (isCountingDown || isDrawTime) {
-        playerShoot();
-        return;
-    }
-
-    if (gameState === "WAITING_RESTART") {
-        resetCharacters();
-        showMainMenu();
-    }
+    if (isCountingDown || isDrawTime) { playerShoot(); return; }
+    if (gameState === "WAITING_RESTART") { resetCharacters(); showMainMenu(); }
 }
-
 gameContainer.addEventListener("click", handleInput);
-
-/* ==========================
-          INIT
-========================== */
 countdownDisplay.textContent = "TOCA PARA JUGAR";
-
 </script>
 </body>
 </html>
